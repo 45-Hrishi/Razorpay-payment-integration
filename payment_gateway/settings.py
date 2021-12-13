@@ -119,8 +119,8 @@ USE_L10N = True
 USE_TZ = True
 
 # API KEYS
-api_key = 'rzp_test_asEBn8bj4p0Fq7'
-secret_key = 'qbr88MrwoCIFY3xrmW9OfDgq'
+#Enter Your api key from razorpay
+#Enter secret api from razorpay
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
