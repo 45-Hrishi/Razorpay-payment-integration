@@ -1,0 +1,811 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block styles %}
+<style>
+    /*carousel*/
+    .carousel-indicators {
+        margin-bottom: -3rem !important;
+    }
+
+    .carousel-text {
+        text-align: left;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .carousel-img {
+        height: 100% !important;
+        width: 90%;
+        border-right: 1px solid black;
+    }
+
+    .carousel-inner {
+        border: 1px #212529 solid;
+    }
+
+    /*about*/
+    .about-img {
+        width: 100% !important;
+        height: 83% !important;
+        margin-top: 0.75rem !important;
+    }
+
+    /* vertical-line*/
+    .vl {
+        border-left: 1px solid #212529 !important;
+        height: 40px !important;
+    }
+
+    /* facts*/
+    .background-image {
+        background-image: linear-gradient(rgba(8, 8, 8, 0.5), rgb(37, 37, 37)),
+        url("{% static 'facts.jpg' %}");
+        height: 400px;
+        filter: blur(1px);
+        -webkit-filter: blur(1px);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .facts-text {
+        color: whitesmoke;
+        font-family: sans-serif;
+        font-weight: bolder;
+        font-size: x-large;
+        text-align: center;
+        z-index: 500;
+    }
+
+    .facts-plus {
+        font-weight: bolder;
+        font-size: xx-large;
+    }
+
+    .facts-row {
+        position: relative;
+        margin-top: -250px !important;
+    }
+
+    /*Donate*/
+    .donate-container {
+        margin-top: 13rem;
+    }
+
+    .donate-image {
+        background-image: url("{% static 'donate.jpg' %}");
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .donate-text {
+        color: white;
+        height: 400px !important;
+        background-color: #212529;
+    }
+
+    /*Event*/
+    .image_event {
+        width: 100%;
+    }
+
+    /*testimonial*/
+    .testimonial-img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel-control-prev {
+        margin-left: -5rem;
+        margin-right: 0rem;
+        height: 50px !important;
+        width: 50px !important;
+        background-color: #198754 !important;
+        margin-top: 6rem;
+    }
+    .carousel-control-next {
+        margin-right: -5rem;
+        margin-left: 0rem;
+        height: 50px !important;
+        width: 50px !important;
+        background-color: #198754 !important;
+        margin-top: 6rem;
+    }
+    .indicator-btn{
+        background-color: #198754 !important;
+        height: 20px !important;
+        width: 20px !important;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+
+    /*footer*/
+    .footer {
+    position: relative;
+    margin-top: 45px;
+    padding-top: 90px;
+    background: #212529;
+}
+
+.footer .footer-contact,
+.footer .footer-link,
+.footer .footer-newsletter {
+    position: relative;
+    margin-bottom: 45px;
+    color: #ffffff;
+}
+
+.footer .footer-contact h2,
+.footer .footer-link h2,
+.footer .footer-newsletter h2 {
+    margin-bottom: 30px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #198754;
+}
+
+.footer .footer-link a {
+    display: block;
+    margin-bottom: 10px;
+    color: #ffffff;
+    transition: .3s;
+}
+
+.footer .footer-link a::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .footer-link a:hover {
+    color: #198754;
+    letter-spacing: 1px;
+}
+
+.footer .footer-contact p i {
+    width: 25px;
+}
+
+.footer .footer-social {
+    position: relative;
+    margin-top: 20px;
+}
+
+.footer .footer-social a {
+    width: 40px;
+    height: 40px;
+    padding: 6px 0;
+}
+
+.footer .footer-social a {
+    margin-top: 5px;
+}
+
+.footer .footer-newsletter form {
+    position: relative;
+    width: 100%;
+}
+
+.footer .footer-newsletter input {
+    margin-bottom: 15px;
+    height: 60px;
+    border: none;
+    border-radius: 0;
+}
+
+.footer .footer-newsletter label {
+    margin-top: 5px;
+    color: #777777;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.footer .footer-newsletter .btn.btn-custom {
+    width: 100%;
+    padding: 15px 0;
+}
+
+.footer .copyright {
+    padding: 0 30px;
+}
+
+.footer .copyright .row {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright p {
+    margin: 0;
+    color: #999999;
+}
+
+.footer .copyright .col-md-6:last-child p {
+    text-align: right;
+}
+
+.footer .copyright p a {
+    color: #ffffff;
+}
+
+.footer .copyright p a:hover {
+    color: #198754;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide my-1 mx-4 mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active indicator-btn"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                aria-label="Slide 2" class="indicator-btn"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                aria-label="Slide 3" class="indicator-btn"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <div class="row ">
+                    <div class="col-lg-5"><img src="{% static 'carousel-1.jpg'%}" class="d-block carousel-img "
+                            alt="...">
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="carousel-text d-none d-md-block">
+                            <h1 style="font-family: serif;">Let's be kind for children</h1>
+                            <h5 style="font-weight: lighter; font-family: cursive;">
+                                Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend
+                                dui acconsequat at lectus in malesuada
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae maxime voluptasquae
+                                totam ex velit excepturi illum quaerat! Possimus, dignissimos?
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div class="row">
+                    <div class="col-lg-5"><img src="{% static 'carousel-2.jpg'%}" class="d-block carousel-img "
+                            alt="...">
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="carousel-text d-none d-md-block">
+                            <h1 style="font-family: serif;">Let's be kind for children</h1>
+                            <h5 style="font-weight: lighter;font-family: cursive;">
+                                Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend
+                                dui acconsequat at lectus in malesuada
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod impedit consequuntur, rem
+                                commodi culpa autem numquam nulla doloribus. Quisquam, quam?
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-lg-5"><img src="{% static 'carousel-3.jpg'%}" class="d-block carousel-img "
+                            alt="...">
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="carousel-text d-none d-md-block">
+                            <h1 style="font-family: serif;">Let's be kind for children</h1>
+                            <h5 style="font-weight: lighter;font-family: cursive;">
+                                Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend
+                                dui acconsequat at lectus in malesuada
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore harum ab molestiae rem
+                                enim hic voluptates aliquid placeat architecto facilis.
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+<div class="container text-center my-5">
+    <div  style="font-family: 'Roboto Slab', serif"><a class="btn btn-outline-success btn-lg rounded-0 mt-5"  href="/donate/">Donate
+        Now</a>
+    </div>
+</div>
+
+<div class="container">
+    <h4 class="text-center" style="font-family: loober;">Learn About Us</h4>
+    <div class="row justify-content-between">
+        <div class="col-lg-5">
+            <img src="{% static 'about.jpg' %}" class="about-img" alt="">
+        </div>
+        <div class="col-lg-5">
+
+            <h2 style="font-family: serif;">Worldwide non-profit charity organization</h2>
+            <h5 style="font-family: loober;">About</h5>
+            <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio
+                dolores, earum consectetur, autem
+                laudantium alias provident adipisci repudiandae doloremque
+            </p>
+            <h5 style="font-family: loober;">Mission</h5>
+            <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio
+                dolores, earum consectetur, autem
+                laudantium alias provident adipisci repudiandae doloremque . Lorem ipsum dolor sit amet.</p>
+            <h5 style="font-family: loober;">Vision</h5>
+            <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio
+                dolores, earum consectetur, autem
+                laudantium alias provident adipisci repudiandae doloremque
+                Lorem ipsum dolor sit amet. </p>
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container">
+    <h4 class="text-center" style="font-family: loober;">Donation For</h4>
+    <h1 class="text-center" style="font-family: serif;">We believe that we can save more lifes with you</h1>
+    <div class="container ms-5 my-3 mb-5">
+        <div class="row justify-content-evenly">
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-3"> <i class="fas fa-apple-alt fa-2x"></i></div>
+                    <div class="col-lg-6">
+                        <h5>Healthy Food</h5>
+                        <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-3"><i class="fas fa-hand-holding-water fa-3x"></i></div>
+
+                    <div class="col-lg-6">
+                        <h5>Pure Water</h5>
+                        <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-3"> <i class="fas fa-user-md fa-3x"></i></div>
+
+                    <div class="col-lg-6">
+                        <h5>Health Care </h5>
+                        <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-evenly">
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-3"> <i class="fas fa-user-graduate fa-3x"></i></div>
+
+                    <div class="col-lg-6">
+                        <h5>Education</h5>
+                        <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-3"><i class="fas fa-home fa-3x"></i></div>
+
+                    <div class="col-lg-6">
+                        <h5>Residence</h5>
+                        <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-3"><i class="fas fa-heartbeat fa-3x"></i></div>
+
+                    <div class="col-lg-6">
+                        <h5>Social Care</h5>
+                        <p style="font-family: cursive;">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="text-center mb-3" style="font-family: loober;">"Sankalp Foundation" Till Now...</h4>
+<div class="container-fluid ms-0 me-0">
+    <div class="background-image"></div>
+    <div class="container facts-container">
+        <div class="row  justify-content-evenly facts-row">
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="flaticon-home"></i>
+                    <div class="facts-text">
+                        <h3 class="facts-plus" data-toggle="counter-up">10 +</h3>
+                        <p style="font-family: loober;">Countries</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="flaticon-charity"></i>
+                    <div class="facts-text">
+                        <h3 class="facts-plus" data-toggle="counter-up">400 +</h3>
+                        <p style="font-family: loober;">Volunteers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="flaticon-kindness"></i>
+                    <div class="facts-text">
+                        <h3 class="facts-plus" data-toggle="counter-up">100 M &#8377;</h3>
+                        <p style="font-family: loober;">Our Goal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="facts-item">
+                    <i class="flaticon-donation"></i>
+                    <div class="facts-text">
+                        <h3 class="facts-plus" data-toggle="counter-up">50 M &#8377;</h3>
+                        <p style="font-family: loober;">Raised</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid ms-0 me-0 donate-container">
+    <div class="donate-image">
+        <div class="row justify-content-evenly mt-3">
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-4 donate-text px-5">
+                <h4 class="title-donate mt-4 text-center" style="font-family: loober;">Donate Now</h4>
+                <h1 class="mt-4" style="font-family: serif;">Let's donate to needy people for better lives</h1>
+                <p class="text-left mt-3 " style="font-family: cursive;">Lorem ipsum dolor sit amet elit. Phasellus nec
+                    pretium mi. Curabitur facilisis ornare velit non. Aliquam
+                    metus tortor, auctor id gravida, viverra quis sem. Curabitur non nisl nec nisi maximus. Aenean
+                    convallis
+                    porttitor.</p>
+                <div class="donate-img text-center mt-3"><a class="btn btn-outline-light btn-lg rounded-0 text-center"
+                        href="/donate" style="font-family: serif;">Donate Now</a></div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container mb-4">
+    <h4 class="text-center mt-5" style="font-family: loober;">Upcoming Events</h4>
+    <h1 class="text-center mb-4" style="font-family: serif;">Be ready for our upcoming charity events</h1>
+    <div class="row justify-content-between">
+        <div class="col-lg-6">
+            <div class="event-image">
+                <img class="image_event" src="{% static 'event-1.jpg'%}">
+            </div>
+            <div class="container alert alert-secondary">
+                <div class="row justify-content-between">
+                    <div class="col-lg-4">
+                        <h6 style="font-family: Lucida Sans Regular"><i class="fas fa-calendar-day"></i> : 27-Dec-2021
+                        </h6>
+                        <hr class="mt-0">
+                        <h6 style="font-family: Lucida Sans Regular"><i class="fas fa-clock"></i> : 12:00 PM</h6>
+                        <hr class="mt-0">
+                        <h6 style="font-family: Lucida Sans Regular"><i class="fas fa-map-marker-alt"></i> : Bihar</h6>
+
+                    </div>
+                    <div class="col-lg-8">
+                        <h3 style="font-family: loober" class="text-end">Lorem ipsum dolor sit ame</h3>
+                        <p class="text-end" style="font-family: cursive;">Lorem ipsum dolor sit amet
+                            consecteturadipisicing elit. Praesentium assumenda hic quas libero,eos ab tempore, non,
+                            nostrum a eaque enim iste quaerat voluptatem
+                        </p>
+                        <div class="row ms-5">
+                            <div class="join col-lg-6">
+                                <a class="btn btn-outline-success rounded-0" style="font-family: serif;">Join Now</a>
+                            </div>
+                            <div class="join col-lg-6">
+                                <a class="btn btn-outline-dark rounded-0" style="font-family: serif;"
+                                    href="/donate">Donate Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="event-image">
+                <img class="image_event" src="{% static 'event-2.jpg'%}">
+            </div>
+            <div class="container alert alert-secondary">
+                <div class="row justify-content-between">
+                    <div class="col-lg-4">
+                        <h6 style="font-family: Lucida Sans Regular"><i class="fas fa-calendar-day"></i> : 09-jan-2022
+                        </h6>
+                        <hr class="mt-0">
+                        <h6 style="font-family: Lucida Sans Regular"><i class="fas fa-clock"></i> : 07:00 PM</h6>
+                        <hr class="mt-0">
+                        <h6 style="font-family:Lucida Sans Regular"><i class="fas fa-map-marker-alt"></i> : W.Bengal
+                        </h6>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <h3 style="font-family:loober" class="text-end">Lorem ipsum dolor sit ame</h3>
+                        <p class="text-end " style="font-family: cursive;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae aperiam quaerat,
+                            animirerumullam minus aspernatur cumque voluptates deserunt, magni aliquam, saepe natus ut
+                            quis quo
+
+                        </p>
+                        <div class="row ms-5">
+                            <div class="join col-lg-6">
+                                <a class="btn btn-outline-success rounded-0" style="font-family: serif;">Join Now</a>
+                            </div>
+                            <div class="join col-lg-6">
+                                <a class="btn btn-outline-dark rounded-0" style="font-family: serif;"
+                                    href="/donate">Donate Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container mt-5">
+    <h4 class="text-center mt-5" style="font-family: loober;">Testimonial</h4>
+    <h1 class="text-center mb-4" style="font-family: serif;">What people are talking about our charity activities</h1>
+
+    <div class="container">
+        <div id="carouselExampleDark2" class="carousel carousel-dark slide  text-dark" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark2" data-bs-slide-to="0" class="active indicator-btn"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark2" data-bs-slide-to="1"
+                    aria-label="Slide 2" class="indicator-btn"></button>
+                <button type="button" data-bs-target="#carouselExampleDark2" data-bs-slide-to="2"
+                    aria-label="Slide 3" class="indicator-btn"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <div class="row justify-content-between ">
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-1.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1  mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-2.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1  mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-3.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1  mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <div class="row justify-content-between ">
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-4.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1  mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-1.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-3.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1  mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <div class="row justify-content-between ">
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-4.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-2.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="row justify-content-between">
+                                <div class="col-lg-4">
+                                    <img class="testimonial-img" src="{% static 'testimonial-3.jpg'%}">
+                                </div>
+                                <div class="col-lg-8">
+                                    <h5 style="font-family: loober;">Person Name</h5>
+                                    <p style="font-family: loober;">Profession</p>
+                                </div>
+                            </div>
+                            <p style="font-family:cursive;" class="ms-1  mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, et adipisci aspernatur debitis eius enim?</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark2"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark2"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block footer %}
+<div class="footer mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-contact">
+                    <h2>Our Head Office</h2>
+                    <p><i class="fas fa-map-marker-alt"></i>07,Nandakini Towers,Pune</p>
+                    <p><i class="fas fa-phone-alt"></i>+91 7620716052</p>
+                    <p><i class="fas fa-envelope"></i>khrishikesh1@gmail.com</p>
+                    <div class="footer-social">
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-link">
+                    <h2>Popular Links</h2>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Popular Causes</a>
+                    <a href="">Upcoming Events</a>
+                    <a href="">Latest Blog</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-link">
+                    <h2>Useful Links</h2>
+                    <a href="">Terms of use</a>
+                    <a href="">Privacy policy</a>
+                    <a href="">Cookies</a>
+                    <a href="">Help</a>
+                    <a href="">FQAs</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-newsletter">
+                    <h2>Newsletter</h2>
+                    <form>
+                        <input class="form-control" placeholder="Email goes here">
+                        <button class="btn btn-outline-success rounded-0 btn-lg btn-block">Submit</button>
+                        <label>Don't worry, we don't spam!</label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container copyright">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; <a href="#">Sankalp Foundation</a>, All Right Reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Designed By <a href="">K. Hrishikesh</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Donation{% endblock %}
+
+{% block styles %}
+<style>
+    .success_gif {
+        width: 50%;
+        height: 50%;
+        margin: 0%;
+        padding: 0%;
+    }
+
+    .success-confirm {
+        position: relative;
+        z-index: 500;
+        margin-top: -80px;
+        display: inline-flex;
+
+    }
+
+    .thank_you {
+        width: 50px;
+        height: 50px;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+{% if status == True %}
+<div class="container">
+    <ul class="messages">
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert {{ message.tags }} alert-dismissible fade show rounded-0" {% endif %}
+            role="alert">{{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {% endfor %}
+        </div>
+    </ul>
+</div>
+{% endif %}
+
+<div class="success text-lg-center text-md-center">
+    <div class="text-center">
+        <img src="{% static 'success_gif.gif' %}" class="success_gif" alt="">
+    </div>
+    <div class="text-center success-confirm">
+        <img class="thank_you text-center" src="{% static 'Thank you.png'%}">
+        <h4 style="font-family: 'Lobster';" class="mt-2  text-center" style>Thanks for Your
+            Donation!!</h4>
+        <img class="thank_you text-center" src="{% static 'Thank you.png'%}">
+    </div>
+</div>
+{% endblock%}

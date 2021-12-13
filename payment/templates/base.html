@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!--Googlefonts-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Slab:wght@200;300;400&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Slab:wght@200;300;400&family=Tillana&display=swap"
+        rel="stylesheet">
+
+    <!--Bootsatrp CSS -->
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <title style="font-family: 'Roboto Slab', serif;">Sankalp Foundation | {% block title %}{% endblock %}</title>
+</head>
+{% block styles %}
+<style>
+    .footer {
+        position: relative;
+        margin-top: 45px;
+        padding-top: 90px;
+        background: #212529;
+    }
+
+    .footer .footer-contact,
+    .footer .footer-link,
+    .footer .footer-newsletter {
+        position: relative;
+        margin-bottom: 45px;
+        color: #ffffff;
+    }
+
+    .footer .footer-contact h2,
+    .footer .footer-link h2,
+    .footer .footer-newsletter h2 {
+        margin-bottom: 30px;
+        font-size: 22px;
+        font-weight: 700;
+        color: #198754;
+    }
+
+    .footer .footer-link a {
+        display: block;
+        margin-bottom: 10px;
+        color: #ffffff;
+        transition: .3s;
+    }
+
+    .footer .footer-link a::before {
+        position: relative;
+        content: "\f105";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        margin-right: 10px;
+    }
+
+    .footer .footer-link a:hover {
+        color: #198754;
+        letter-spacing: 1px;
+    }
+
+    .footer .footer-contact p i {
+        width: 25px;
+    }
+
+    .footer .footer-social {
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .footer .footer-social a {
+        width: 40px;
+        height: 40px;
+        padding: 6px 0;
+    }
+
+    .footer .footer-social a {
+        margin-top: 5px;
+    }
+
+    .footer .footer-newsletter form {
+        position: relative;
+        width: 100%;
+    }
+
+    .footer .footer-newsletter input {
+        margin-bottom: 15px;
+        height: 60px;
+        border: none;
+        border-radius: 0;
+    }
+
+    .footer .footer-newsletter label {
+        margin-top: 5px;
+        color: #777777;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .footer .footer-newsletter .btn.btn-custom {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    .footer .copyright {
+        padding: 0 30px;
+    }
+
+    .footer .copyright .row {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        border-top: 1px solid rgba(256, 256, 256, .1);
+    }
+
+    .footer .copyright p {
+        margin: 0;
+        color: #999999;
+    }
+
+    .footer .copyright .col-md-6:last-child p {
+        text-align: right;
+    }
+
+    .footer .copyright p a {
+        color: #ffffff;
+    }
+
+    .footer .copyright p a:hover {
+        color: #198754;
+    }
+</style>
+{% endblock %}
+
+<body>
+    {% block content %}
+    <!--Bootsatrp JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    {% endblock %}
+
+
+
+    {% block footer %}
+    {% endblock %}
+</body>
+
+</html>

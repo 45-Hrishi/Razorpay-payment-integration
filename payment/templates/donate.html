@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Donation{% endblock %}
+{% block styles %}
+<style>
+    .logo-img {
+        width: 170px !important;
+        height: 170px !important;
+        display: flex;
+        text-align: center;
+
+    }
+
+    .donate-container {
+        margin-top: 5rem;
+        margin-bottom: 1rem !important;
+    }
+
+    .donate-image {
+        background-image: url("{% static 'donate.jpg' %}");
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .donate-text {
+        color: white;
+        height: 400px !important;
+        background-color: #212529;
+    }
+
+    .main-donation-title {
+        padding-top: 10rem !important;
+        color: #ffffff !important;
+        font-weight: bolder;
+        font-size: 50px;
+    }
+
+    .main-donate-img {
+        width: 100% !important;
+        background-image: linear-gradient(rgb(95, 95, 95), rgba(0, 0, 0, 0.5)),
+        url("{% static 'page-header.jpg' %}");
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .footer {
+        position: relative;
+        margin-top: 45px;
+        padding-top: 90px;
+        background: #212529;
+    }
+
+    .footer .footer-contact,
+    .footer .footer-link,
+    .footer .footer-newsletter {
+        position: relative;
+        margin-bottom: 45px;
+        color: #ffffff;
+    }
+
+    .footer .footer-contact h2,
+    .footer .footer-link h2,
+    .footer .footer-newsletter h2 {
+        margin-bottom: 30px;
+        font-size: 22px;
+        font-weight: 700;
+        color: #198754;
+    }
+
+    .footer .footer-link a {
+        display: block;
+        margin-bottom: 10px;
+        color: #ffffff;
+        transition: .3s;
+    }
+
+    .footer .footer-link a::before {
+        position: relative;
+        content: "\f105";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        margin-right: 10px;
+    }
+
+    .footer .footer-link a:hover {
+        color: #198754;
+        letter-spacing: 1px;
+    }
+
+    .footer .footer-contact p i {
+        width: 25px;
+    }
+
+    .footer .footer-social {
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .footer .footer-social a {
+        width: 40px;
+        height: 40px;
+        padding: 6px 0;
+    }
+
+    .footer .footer-social a {
+        margin-top: 5px;
+    }
+
+    .footer .footer-newsletter form {
+        position: relative;
+        width: 100%;
+    }
+
+    .footer .footer-newsletter input {
+        margin-bottom: 15px;
+        height: 60px;
+        border: none;
+        border-radius: 0;
+    }
+
+    .footer .footer-newsletter label {
+        margin-top: 5px;
+        color: #777777;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .footer .footer-newsletter .btn.btn-custom {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    .footer .copyright {
+        padding: 0 30px;
+    }
+
+    .footer .copyright .row {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        border-top: 1px solid rgba(256, 256, 256, .1);
+    }
+
+    .footer .copyright p {
+        margin: 0;
+        color: #999999;
+    }
+
+    .footer .copyright .col-md-6:last-child p {
+        text-align: right;
+    }
+
+    .footer .copyright p a {
+        color: #ffffff;
+    }
+
+    .footer .copyright p a:hover {
+        color: #198754;
+    }
+
+    /*razorpay-logo*/
+    .razorpay-logo{
+        width: 10%;
+    }
+    .razorpay-logo-secured{
+        width: 5%;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+{% include 'navbar.html' %}
+
+{% if messages %}
+<div class="container">
+    <ul class="messages">
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert {{ message.tags }} alert-dismissible fade show rounded-0" {% endif %}
+            role="alert">{{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {% endfor %}
+        </div>
+    </ul>
+</div>
+{% endif %}
+
+<div class="container-fluid">
+    <div class="main-donate-img">
+        <h1 class="text-center   main-donation-title" style="font-family: serif;">Donate Now</h1>
+        <h4 class="text-center text-light main-donation-text" style="font-family: cursive;">Bringing the smile on faces
+        </h4>
+        <div class="text-center pt-5"><a class="btn btn-outline-light rounded-0 btn-lg" href="/">Home</a></div>
+
+    </div>
+
+
+</div>
+
+<div class="container  donate-container">
+    <div class="donate-image mb-1">
+        <div class="row justify-content-between mt-3">
+            <div class="col-lg-4 bg-dark text-light ">
+                <h4 class="title-donate mt-4 text-center" style="font-family: loober;">Donation Form</h4>
+                <div class="me-4 ms-4 mb-2 ">
+                    {% crispy form %}
+                </div>
+                {% if payment %}
+                <form action="{% url 'payment:success'%}" class="ms-4" method="POST">
+                    {% csrf_token %}
+                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_asEBn8bj4p0Fq7"
+                        data-amount="{{payment.amount}}" data-currency="{{payment.currency}}"
+                        data-order_id="{{payment.id}}" data-buttontext="Donate" data-name="Sankalp Foundation"
+                        data-description="Donate at Sankalp Foundation for welbeing of needy peoples.."
+                        data-image="{% static 'images.jpg'%}" data-prefill.name="{{payment.name}}"
+                        data-prefill.email="{{payment.email}}" data-prefill.contact="{{payment.phone_no}}"
+                        data-theme.color="#212529">
+                        </script>
+                    <input type="hidden" custom="Hidden Element" name="hidden">
+                </form>
+                {% endif %}
+            </div>
+            <div class="col-lg-4 donate-text px-5 ">
+
+                <h1 class="mt-2" style="font-family: serif;">Let's donate to needy people for better lives</h1>
+                <p class="text-left mt-3 " style="font-family: cursive;">Lorem ipsum dolor sit amet elit. Phasellus nec
+                    pretium mi. Curabitur facilisis ornare velit non. Aliquam
+                    metus tortor, auctor id gravida, viverra quis sem. Curabitur non nisl nec nisi maximus. Aenean
+                    convallis
+                    porttitor.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mb-1 mt-0">
+    <h3 class="text-center mb-4" style="font-family: loober;">Donation Using <img class="razorpay-logo" src="{% static 'razorpay.png'%}"></h3>
+    <form>
+        <script src="https://checkout.razorpay.com/v1/payment-button.js"
+         data-payment_button_id="pl_IWqfoPQKsQtbJj" async> </script>
+    </form>
+    <h5 class="text-center text-muted mt-1" style="font-family: 'Tillana', cursive;font-size: small;font-weight: bold;">Secured By <img class="razorpay-logo-secured"src="{% static 'razorpay.png' %}"></h5>
+</div>
+
+
+
+{% endblock %}
+{% block footer %}
+<div class="footer mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-contact">
+                    <h2>Our Head Office</h2>
+                    <p><i class="fas fa-map-marker-alt"></i>07,Nandakini Towers,Pune</p>
+                    <p><i class="fas fa-phone-alt"></i>+91 7620716052</p>
+                    <p><i class="fas fa-envelope"></i>khrishikesh1@gmail.com</p>
+                    <div class="footer-social">
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-success rounded-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-link">
+                    <h2>Popular Links</h2>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Popular Causes</a>
+                    <a href="">Upcoming Events</a>
+                    <a href="">Latest Blog</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-link">
+                    <h2>Useful Links</h2>
+                    <a href="">Terms of use</a>
+                    <a href="">Privacy policy</a>
+                    <a href="">Cookies</a>
+                    <a href="">Help</a>
+                    <a href="">FQAs</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-newsletter">
+                    <h2>Newsletter</h2>
+                    <form>
+                        <input class="form-control" placeholder="Email goes here">
+                        <button class="btn btn-outline-success rounded-0 btn-lg btn-block">Submit</button>
+                        <label>Don't worry, we don't spam!</label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container copyright">
+        <div class="row">
+            <div class="col-md-6">
+                <p>&copy; <a href="#">Sankalp Foundation</a>, All Right Reserved.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Designed By <a href="">K. Hrishikesh</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
