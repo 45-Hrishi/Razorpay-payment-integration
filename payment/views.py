@@ -26,7 +26,7 @@ def donate(request):
        
         
         
-        client = razorpay.Client(auth=("rzp_test_asEBn8bj4p0Fq7", "qbr88MrwoCIFY3xrmW9OfDgq"))
+        client = razorpay.Client(auth=("Enter Your api key from razorpay", "enter secret api from razorpay"))
         try:
             payment_responce = client.order.create(dict(amount=amount,currency="INR",payment_capture='1'))
             
@@ -60,7 +60,7 @@ def donate(request):
 def success(request):
     response = request.POST
     print(response)
-    client = razorpay.Client(auth = ("rzp_test_asEBn8bj4p0Fq7", "qbr88MrwoCIFY3xrmW9OfDgq"))
+    client = razorpay.Client(auth = ("Enter Your api key from razorpay", "enter secret api from razorpay"))
     params_dict={
         'razorpay_order_id':response['razorpay_order_id'],
         'razorpay_payment_id':response['razorpay_payment_id'],
